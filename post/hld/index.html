@@ -1,110 +1,102 @@
+
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8" >
+    
+<meta charset="utf-8" >
 
 <title>树链剖分 | Gridea</title>
+<meta name="description" content="仓鼠球的小站">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://oierniu.github.io/blog//favicon.ico?v=1651152193472">
+<link rel="shortcut icon" href="https://oierniu.github.io/blog//favicon.ico?v=1651152652991">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://oierniu.github.io/blog//styles/main.css">
 
 
 
-<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
 
 
 
-    <meta name="description" content="树链剖分是一种可以 应付毒瘤出题人 将树上问题转换为线性数组问题的算法
-
-另外在观看文章前，普及一下DFS序，
-就是对一棵树进行DFS，其中第 iii 个点是第 pip_ipi​ 个遍历到的，
-那么其 DFS 序就是 pip_ipi​
-
-重..." />
-    <meta name="keywords" content="学习笔记" />
   </head>
   <body>
     <div id="app" class="main">
-
-      <div class="sidebar" :class="{ 'full-height': menuVisible }">
-  <div class="top-container" data-aos="fade-right">
-    <div class="top-header-container">
-      <a class="site-title-container" href="https://oierniu.github.io/blog/">
-        <img src="https://oierniu.github.io/blog//images/avatar.png?v=1651152193472" class="site-logo">
+      <div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="https://oierniu.github.io/blog/">
+        <img class="avatar" src="https://oierniu.github.io/blog//images/avatar.png?v=1651152652991" alt="" width="32px" height="32px">
+      </a>
+      <a href="https://oierniu.github.io/blog/">
         <h1 class="site-title">Gridea</h1>
       </a>
-      <div class="menu-btn" @click="menuVisible = !menuVisible">
-        <div class="line"></div>
-      </div>
     </div>
-    <div>
+    <div class="right">
+      <transition name="fade">
+        <i class="icon" :class="{ 'icon-close-outline': menuVisible, 'icon-menu-outline': !menuVisible }" @click="menuVisible = !menuVisible"></i>
+      </transition>
+    </div>
+  </div>
+</div>
+
+<transition name="fade">
+  <div class="menu-container" style="display: none;" v-show="menuVisible">
+    <div class="menu-list">
       
         
-          <a href="https://oierniu.github.io/blog/" class="site-nav">
+          <a href="https://oierniu.github.io/blog/" class="menu purple-link">
             首页
           </a>
         
       
         
-          <a href="https://oierniu.github.io/blog/tags" class="site-nav">
+          <a href="https://oierniu.github.io/blog/tags" class="menu purple-link">
             标签
           </a>
         
       
         
-          <a href="https://oierniu.github.io/blog/archives" class="site-nav">
+          <a href="https://oierniu.github.io/blog/archives" class="menu purple-link">
             归档
           </a>
         
       
         
-          <a href="https://oierniu.github.io/blog/post/about" class="site-nav">
+          <a href="https://oierniu.github.io/blog/post/about" class="menu purple-link">
             关于
           </a>
         
       
     </div>
   </div>
-  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
-    <div class="social-container">
-      
-        
-          <a class="social-link" href="https://github.com/oierniu/" target="_blank">
-            <i class="fab fa-github"></i>
-          </a>
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-    </div>
-    <div class="site-description">
-      仓鼠球的小站
-    </div>
-    <div class="site-footer">
-      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://oierniu.github.io/blog//atom.xml" target="_blank">RSS</a>
-    </div>
-  </div>
-</div>
+</transition>
 
 
-      <div class="main-container">
-        <div class="content-container" data-aos="fade-up">
-          <div class="post-detail">
-            <h2 class="post-title">树链剖分</h2>
-            <div class="post-date">2022-04-28</div>
+      <div class="content-container">
+        <div class="post-detail">
+          
+          <h2 class="post-title">树链剖分</h2>
+          <div class="post-info post-detail-info">
+            <span><i class="icon-calendar-outline"></i> 2022-04-28</span>
             
-            <div class="post-content" v-pre>
-              <p>树链剖分是一种可以 <s>应付毒瘤出题人</s> 将树上问题转换为线性数组问题的算法</p>
+              <span>
+                <i class="icon-pricetags-outline"></i>
+                
+                  <a href="https://oierniu.github.io/blog/tag/note/">
+                    学习笔记
+                    
+                  </a>
+                
+              </span>
+            
+          </div>
+          <div class="post-content">
+            <p>树链剖分是一种可以 <s>应付毒瘤出题人</s> 将树上问题转换为线性数组问题的算法</p>
 <blockquote>
 <p>另外在观看文章前，普及一下DFS序，</p>
 <p>就是对一棵树进行DFS，其中第 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>i</mi></mrow><annotation encoding="application/x-tex">i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord mathdefault">i</span></span></span></span> 个点是第 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>p</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">p_i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathdefault">p</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 个遍历到的，</p>
@@ -523,30 +515,37 @@ int main()
 
 </code></pre>
 
-            </div>
-            
-              <div class="tag-container">
-                
-                  <a href="https://oierniu.github.io/blog/tag/note/" class="tag">
-                    学习笔记
-                  </a>
-                
-              </div>
-            
-            
-
-            
-
           </div>
-
         </div>
+
+        
       </div>
+
+      
+
+      <div class="site-footer">
+  <div class="slogan">仓鼠球的小站</div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://oierniu.github.io/blog//atom.xml" target="_blank">RSS</a>
+</div>
+
+
     </div>
+    <script type="application/javascript">
 
-    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-<script type="application/javascript">
-
-AOS.init();
+hljs.initHighlightingOnLoad()
 
 var app = new Vue({
   el: '#app',
@@ -556,13 +555,6 @@ var app = new Vue({
 })
 
 </script>
-
-
-  <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
-  <script>
-    hljs.initHighlightingOnLoad()
-  </script>
-
 
 
 
